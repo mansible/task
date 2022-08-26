@@ -13,16 +13,15 @@ $count = 0                      # Count's of repeated emails
 $export = @()                   # Define export array
 $emails = @()                   # Define array for checking equals email's
 # Do array for emails to check on equals
-while ($i -lt $sum)
-{
+while ($i -lt $sum) {
     $Name = ($array.name[$i].Split(" ") | ForEach-Object {$_.Substring(0,1).toUpper() + $_.Substring(1).toLower()}) -join '' + ' '    # Do name like pattern name
     $var1 = $array.name[$i].Split(" ") | ForEach-Object {$_.Substring(0).toLower()}                                                   # Do lower name and surname
     $Email = $var1[0].Remove(1) + $var1[1]                                                                                            # email
-  
+# Create an array with emails
     $object = New-Object psobject                                                                                                     # Create emails array and fill data
     $object | Add-Member -MemberType NoteProperty -Name "email" -value $Email
-    $i++
-    $emails += $object                                                                                                  
+    $emails += $object
+$i++                                                                                                 
 }
 # Do final array to export in .csv
 while ($j -lt $sum) {
@@ -35,7 +34,8 @@ while ($j -lt $sum) {
     else {
         $Email = $var1[0].Remove(1) + $var1[1] + '@abc.com'
     }
-    $object = New-Object psobject                                                                                                     # Create array to export with headers
+ # Create array to export with headers   
+    $object = New-Object psobject                                                                                                    
     $object | Add-Member -MemberType NoteProperty -Name "id" -value $array.id[$j] 
     $object | Add-Member -MemberType NoteProperty -Name "location_id" -value $array.location_id[$j]
     $object | Add-Member -MemberType NoteProperty -Name "name" -value $Name
